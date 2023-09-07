@@ -14,6 +14,7 @@ TOKEN ADMIN = '1c945d19609fc94b73e8a29a541dae43d82e6c25'
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -141,6 +142,16 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny' #Libera sem autenticação
     ],
     'DEFAULT_AUTHENTICATION_CLASSES' : [
-        'rest_framework.authentication.TokenAuthentication' #Trabalhar com Token
+        #Trabalhar com web Token
+        #'rest_framework.authentication.TokenAuthentication' 
+        
+        #Trabalhar com JWT
+        'rest_framework_simplejwt.authentication.JWTAuthentication' 
     ],
+}
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES' : ("Bearer" ,),
+    'ACCESS_TOKEN_LIFETIME' : timedelta(minutes=2),
+    'REFRESH_TOKEN_LIFETIME' : timedelta(minutes=10),
 }
